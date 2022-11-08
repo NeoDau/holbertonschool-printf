@@ -150,15 +150,20 @@ va_list args;
 int VaArg_len = 0;
 
 	va_start(args, format);
-	VaArg_len = _prontf(format, args);
+	VaArg_len += _prontf(format, args);
 	va_end(args);
 	for (strlen = 0; format[strlen]; strlen++)
 		if (format[strlen] == '%')
 		{
 			for (arrayIterator = 0; escapeSeqArray[arrayIterator]; arrayIterator++)
 				if (format[strlen + 1] == escapeSeqArray[arrayIterator])
-					escapeSequences += 1;
+				{
+					escapeSequences++;
+					strlen++;
+					break;
+				}
 		}
+	printf("%d\n%d\n%d\n", VaArg_len, strlen, escapeSequences);
 	return (strlen - (escapeSequences * 2) + VaArg_len);
 }
 /*****************************************************************************/
@@ -268,7 +273,7 @@ int iterate = 0;
 			{
 			char *StringFormatReplacement = va_arg(args, char *);
 
-			VaArg_len = _strlen(StringFormatReplacement);
+			VaArg_len += _strlen(StringFormatReplacement);
 			while (StringFormatReplacement[iterate])
 			{
 				putchar(StringFormatReplacement[iterate]);
@@ -281,12 +286,12 @@ int iterate = 0;
 			char CharFormatReplacement = va_arg(args, int);
 
 			putchar(CharFormatReplacement);
-			VaArg_len = 1;
+			VaArg_len++;
 			break;
 			}
 			case '%':
 			{
-			VaArg_len = 1;
+			VaArg_len++;
 			putchar('%');
 			break;
 			}
@@ -393,10 +398,9 @@ int iterate = 0;
 			}
 			default:
 			{
-			putchar(format[ctr - 1]);
-			putchar(format[ctr]);
-			VaArg_len = 2;
-			break;
+				putchar(format[ctr - 1]);
+				putchar(format[ctr]);
+				break;
 			}
 			}
 			foundPercent = 0;
