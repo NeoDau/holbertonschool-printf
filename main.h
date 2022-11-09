@@ -128,7 +128,8 @@ int escapeSeqArray[] = {'d', 'i', 'c', 's', '%', 'u', 'x', 'X', 'p', 'o'};
 int arrayIterator;
 va_list args;
 int VaArg_len = 0;
-
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	VaArg_len += _prontf(format, args);
 	va_end(args);
@@ -164,7 +165,6 @@ int ctr = 0;
 int foundPercent = 0;
 int VaArg_len = 0;
 int iterate = 0;
-
 	while (format[ctr])
 	{
 		if (!(foundPercent))
@@ -185,19 +185,37 @@ int iterate = 0;
 			case 's':
 			{
 			char *StringFormatReplacement = va_arg(args, char *);
-
+			if (!StringFormatReplacement)
+			{
+				char *null = "(null)";
+				int i = 0;
+				while (null[i])
+				{
+					putchar(null[i]);
+					i++;
+				}
+				foundPercent = 0;
+				VaArg_len += 6;
+				break;
+			}
 			VaArg_len += _strlen(StringFormatReplacement);
 			while (StringFormatReplacement[iterate])
 			{
 				putchar(StringFormatReplacement[iterate]);
 				iterate++;
 			}
+			iterate = 0;
 			break;
 			}
 			case 'c':
 			{
 			char CharFormatReplacement = va_arg(args, int);
-
+			if (!CharFormatReplacement)
+			{
+				foundPercent = 0;
+				VaArg_len += -1;
+				break;
+			}
 			putchar(CharFormatReplacement);
 			VaArg_len++;
 			break;
@@ -211,6 +229,13 @@ int iterate = 0;
 			case 'd':
 			{
 			int DecimalFormatReplacement = va_arg(args, int);
+			if (!DecimalFormatReplacement)
+			{
+				putchar('0');
+				foundPercent = 0;
+				VaArg_len += 1;
+				break;
+			}
 			char buf[32];
 			int i;
 
@@ -225,6 +250,13 @@ int iterate = 0;
 			case 'i':
 			{
 			int IntegerFormatReplacement = va_arg(args, int);
+			if (!IntegerFormatReplacement)
+			{
+				foundPercent = 0;
+				VaArg_len += 1;
+				putchar('0');
+				break;
+			}
 			char buf[32];
 			int i;
 
@@ -241,7 +273,13 @@ int iterate = 0;
 			unsigned int UnsignedIntReplacement = va_arg(args, unsigned int);
 			char buf[32];
 			int i;
-
+			if (!UnsignedIntReplacement)
+			{
+				foundPercent = 0;
+				VaArg_len += 1;
+				putchar('0');
+				break;
+			}
 			ntostring(UnsignedIntReplacement, 10, buf);
 			for (i = 0; buf[i]; i++)
 			{
@@ -255,7 +293,13 @@ int iterate = 0;
 			long HexFormatReplacement = va_arg(args, unsigned int);
 			char buf[25];
 			int i;
-
+			if (!HexFormatReplacement)
+			{
+				foundPercent = 0;
+				VaArg_len++;
+				putchar('0');
+				break;
+			}
 			ntostring(HexFormatReplacement, 16, buf);
 			for (i = 0; buf[i]; i++)
 			{
@@ -269,7 +313,13 @@ int iterate = 0;
 			long HexFormatBigboy = va_arg(args, unsigned int);
 			char buf[25];
 			int i;
-
+			if (!HexFormatBigboy)
+			{
+				foundPercent = 0;
+				VaArg_len++;
+				putchar('0');
+				break;
+			}
 			uppercase_ntostring(HexFormatBigboy, 16, buf);
 			for (i = 0; buf[i]; i++)
 			{
@@ -284,6 +334,13 @@ int iterate = 0;
 			char buf[32];
 			int i;
 
+			if (!OctalFormatReplacement)
+			{
+				foundPercent = 0;
+				VaArg_len++;
+				putchar('0');
+				break;
+			}
 			ntostring(OctalFormatReplacement, 8, buf);
 			for (i = 0; buf[i]; i++)
 			{
@@ -298,6 +355,11 @@ int iterate = 0;
 			char buf[32];
 			int i;
 
+			if (!PointerFormatReplacement)
+			{
+				foundPercent = 0;
+				break;
+			}
 			putchar('0');
 			putchar('x');
 			VaArg_len += 2;
@@ -316,7 +378,7 @@ int iterate = 0;
 				break;
 			}
 			}
-			foundPercent = 0;
+			foundPercent = 0;	
 		}
 		ctr++;
 	}
