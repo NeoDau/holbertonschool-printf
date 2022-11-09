@@ -7,25 +7,27 @@
 # DESCRIPTION
        Points arguments depending on the assigned option.
        On success returns the number of characters printed.
-       In case of not being successful it returns -1.
+       In case of not being successful it returns ‐1.
 
        (Characters that apply change)
-       %c - character
-       %d - decimal
-       %i - integer
-       %o - unsigned octal integer
-       %p - pointer type
-       %s - string
-       %u - unsigned decimal integer
-       %x - unsigned hex integer
-       %X - unsigned hex integer
-       % - print %
+       %c ‐ character
+       %d ‐ decimal
+       %i ‐ integer
+       %o ‐ unsigned octal integer
+       %p ‐ pointer type
+       %s ‐ string
+       %u ‐ unsigned decimal integer
+       %x ‐ unsigned hex integer
+       %X ‐ unsigned hex integer
+       % ‐ print %
 
 #SEE ALSO
        printf(3)
 
 #BUGS
-       i don't know
+       i don’t know
 
 #AUTHOR
-       Agustin Curucheti
+
+	Agustin Curuchet
+
