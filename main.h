@@ -185,10 +185,12 @@ int iterate = 0;
 			case 's':
 			{
 			char *StringFormatReplacement = va_arg(args, char *);
+
 			if (!StringFormatReplacement)
 			{
 				char *null = "(null)";
 				int i = 0;
+
 				while (null[i])
 				{
 					putchar(null[i]);
@@ -210,6 +212,7 @@ int iterate = 0;
 			case 'c':
 			{
 			char CharFormatReplacement = va_arg(args, int);
+
 			if (!CharFormatReplacement)
 			{
 				foundPercent = 0;
@@ -229,6 +232,9 @@ int iterate = 0;
 			case 'd':
 			{
 			int DecimalFormatReplacement = va_arg(args, int);
+			char buf[32];
+			int i;
+
 			if (!DecimalFormatReplacement)
 			{
 				putchar('0');
@@ -236,9 +242,6 @@ int iterate = 0;
 				VaArg_len += 1;
 				break;
 			}
-			char buf[32];
-			int i;
-
 			ntostring(DecimalFormatReplacement, 10, buf);
 			for (i = 0; buf[i]; i++)
 			{
@@ -250,6 +253,9 @@ int iterate = 0;
 			case 'i':
 			{
 			int IntegerFormatReplacement = va_arg(args, int);
+			char buf[32];
+			int i;
+
 			if (!IntegerFormatReplacement)
 			{
 				foundPercent = 0;
@@ -257,9 +263,6 @@ int iterate = 0;
 				putchar('0');
 				break;
 			}
-			char buf[32];
-			int i;
-
 			ntostring(IntegerFormatReplacement, 10, buf);
 			for (i = 0; buf[i]; i++)
 			{
@@ -273,6 +276,7 @@ int iterate = 0;
 			unsigned int UnsignedIntReplacement = va_arg(args, unsigned int);
 			char buf[32];
 			int i;
+
 			if (!UnsignedIntReplacement)
 			{
 				foundPercent = 0;
@@ -293,6 +297,7 @@ int iterate = 0;
 			long HexFormatReplacement = va_arg(args, unsigned int);
 			char buf[25];
 			int i;
+
 			if (!HexFormatReplacement)
 			{
 				foundPercent = 0;
@@ -313,6 +318,7 @@ int iterate = 0;
 			long HexFormatBigboy = va_arg(args, unsigned int);
 			char buf[25];
 			int i;
+
 			if (!HexFormatBigboy)
 			{
 				foundPercent = 0;
@@ -378,7 +384,7 @@ int iterate = 0;
 				break;
 			}
 			}
-			foundPercent = 0;	
+			foundPercent = 0;
 		}
 		ctr++;
 	}
