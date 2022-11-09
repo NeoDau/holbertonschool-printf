@@ -6,11 +6,8 @@
 #include <stdlib.h>
 
 int _strlen(char *s);
-int print(long int n);
 int _prontf(const char *format, va_list args);
 int _printf(const char *format, ...);
-int FromDeci(unsigned long int n, int base);
-int lowercaseDeciFunc(long int n, int base);
 void unsigned_ntostring(unsigned long int number, int base, char *buffer);
 void ntotring(long int number, int base, char *buffer);
 void uppercase_ntostring(unsigned long int number, int base, char *buffer);
@@ -118,23 +115,6 @@ return (i);
 }
 /****************************************************************************/
 /**
- * print - prints a number using recursion, scraped for better functions.
- * @n: Number to be printed.
- * Return: No return.
- */
-int print(long int n)
-{
-	if (n < 0)
-	{
-		putchar('-');
-		n = -n;
-	}
-	if (n / 10)
-		print(n / 10);
-	putchar(n % 10 + '0');
-}
-/*****************************************************************************/
-/**
  * _printf - Formatted printing function.
  * @format: String with possible format instructions.
  * Return: Returns the lenght of the printed output.
@@ -169,77 +149,6 @@ int VaArg_len = 0;
 	if (strlen == 0)
 		return (0);
 	return (strlen - (escapeSequences * 2) + VaArg_len);
-}
-/*****************************************************************************/
-/**
- * FromDeci - Scrapped due to instability and bad output.
- * @n: Number to be printed.
- * @base: Base to be transform number into.
- * Return: Returns the amount of characters printed.
- */
-
-int FromDeci(unsigned long n, int base)
-{
-unsigned long decimalnum, quotient, remainder;
-int i, j = 0;
-char hexadecimalnum[100];
-int strlen = 0;
-
-decimalnum = n;
-quotient = decimalnum;
-	while (quotient != 0)
-	{
-		remainder = quotient % base;
-		if (remainder <= 10)
-			hexadecimalnum[j++] = 48 + remainder;
-		else
-			hexadecimalnum[j++] = 55 + remainder;
-		quotient = quotient / base;
-	}
-	for (i = j; i >= 0; i--)
-	{
-		putchar(hexadecimalnum[i]);
-		strlen++;
-	}
-	return (strlen);
-}
-/*****************************************************************************/
-/**
- * lowercaseDeciFunc - Prints a number from base ten to base but in lowercase.
- * @n: Number to be transformed and printed.
- * @base: Base to transfrom number into.
- * Return: Returns amount of characters printed.
- */
-
-int lowercaseDeciFunc(long n, int base)
-{
-long decimalnum, quotient, remainder;
-int i, j = 0;
-int strlen = 0;
-char hexadecimalnum[100];
-decimalnum = n;
-quotient = decimalnum;
-	while (quotient != 0)
-	{
-		remainder = quotient % base;
-		if (remainder < 10)
-			hexadecimalnum[j++] = 48 + remainder;
-		else
-			hexadecimalnum[j++] = 55 + remainder;
-		quotient = quotient / base;
-	}
-	for (i = j; i >= 0; i--)
-		if (hexadecimalnum[i] > 'A' && hexadecimalnum[i] < 'Z')
-		{
-			putchar(hexadecimalnum[i] + 32);
-			strlen++;
-		}
-		else
-		{
-			putchar(hexadecimalnum[i]);
-			strlen++;
-		}
-	return (strlen);
 }
 /*****************************************************************************/
 /**
