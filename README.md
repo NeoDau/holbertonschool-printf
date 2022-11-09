@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Project _printf #
 ***
 ### Objective ###
@@ -25,3 +26,6 @@
 
 ### Flowchart ###
 ![]()
+=======
+Nachoo made me do it
+>>>>>>> e877038a3a9e322b7d30a2faa27a3330c1333199
