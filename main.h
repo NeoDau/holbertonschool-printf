@@ -216,7 +216,7 @@ int iterate = 0;
 			if (!CharFormatReplacement)
 			{
 				foundPercent = 0;
-				VaArg_len += -1;
+				VaArg_len += 1;
 				break;
 			}
 			putchar(CharFormatReplacement);
