@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- *main - simple example funciton
+ *ario - simple example funciton
  *
  *Return: returns 0 un succes
  */
