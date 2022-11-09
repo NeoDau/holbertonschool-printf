@@ -12,7 +12,7 @@ int _printf(const char *format, ...);
 int FromDeci(unsigned long int n, int base);
 int lowercaseDeciFunc(long int n, int base);
 void unsigned_ntostring(unsigned long int number, int base, char *buffer);
-void ntotring(long long int number, int base, char *buffer);
+void ntotring(long int number, int base, char *buffer);
 void uppercase_ntostring(unsigned long int number, int base, char *buffer);
 /*****************************************************************************/
 /**
@@ -57,7 +57,7 @@ char buf[65];
  * @buffer: Holds the data temporarily.
  */
 
-void ntostring(long long int number, int base, char *buffer)
+void ntostring(long int number, int base, char *buffer)
 {
 	if (number < 0)
 	{
@@ -152,6 +152,7 @@ int VaArg_len = 0;
 	va_start(args, format);
 	VaArg_len += _prontf(format, args);
 	va_end(args);
+
 	for (strlen = 0; format[strlen]; strlen++)
 		if (format[strlen] == '%')
 		{
@@ -163,7 +164,10 @@ int VaArg_len = 0;
 					break;
 				}
 		}
-	printf("%d\n%d\n%d\n", VaArg_len, strlen, escapeSequences);
+	if (strlen == 1 && format[0] == '%')
+		return (-1);
+	if (strlen == 0)
+		return (0);
 	return (strlen - (escapeSequences * 2) + VaArg_len);
 }
 /*****************************************************************************/
@@ -339,7 +343,7 @@ int iterate = 0;
 			}
 			case 'x':
 			{
-			long long HexFormatReplacement = va_arg(args, unsigned int);
+			long HexFormatReplacement = va_arg(args, unsigned int);
 			char buf[25];
 			int i;
 
@@ -353,7 +357,7 @@ int iterate = 0;
 			}
 			case 'X':
 			{
-			long long HexFormatBigboy = va_arg(args, unsigned int);
+			long HexFormatBigboy = va_arg(args, unsigned int);
 			char buf[25];
 			int i;
 
@@ -381,13 +385,13 @@ int iterate = 0;
 			}
 			case 'p':
 			{
-			putchar('0');
-			putchar('x');
-			VaArg_len += 2;
 			void *PointerFormatReplacement = va_arg(args, void *);
 			char buf[32];
 			int i;
 
+			putchar('0');
+			putchar('x');
+			VaArg_len += 2;
 			ntostring((unsigned long int)PointerFormatReplacement, 16, buf);
 			for (i = 0; buf[i]; i++)
 			{
