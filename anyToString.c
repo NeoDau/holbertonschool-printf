@@ -2,20 +2,27 @@
 
 /**
  * ntostring - Calls upon unsignedntostring to turn a number into a string.
- * @number: Number to be transformed, negative or positive.
+ * @args: Number to be transformed, negative or positive.
  * @base: Also transforms to base from base ten.
  * @buffer: Holds the data temporarily.
  * @indicator: Tells function to return upper or lower case.
  * Return: 0.
  */
 
-int ntostring(long long int number, int base, char *buffer, int indicator)
+int ntostring(va_list args, int base, char *buffer, int indicator)
 {
+	long long int number = va_arg(args, int);
+	int negative = 0;
+
 	if (number < 0)
 	{
 		*buffer++ = '-';
 		number = -number;
+		negative = 1;
 	}
-	PosNtoString(number, base, buffer, indicator);
-	return (0);
+		PosNtoString(number, base, buffer, indicator);
+		if (negative)
+			return (_printf("%s", buffer - 1));
+		else
+			return (_printf("%s", buffer));
 }
