@@ -7,15 +7,18 @@
  * Return: Returns number of prints
  */
 
-int _puts(char *string)
+int _puts(va_list args, int b, char *buf, int ind)
 {
-	int i;
+  char *string = va_arg(args, char *);
+  int trash = b = ind = 0;
+  int i;
+  for (i = 0; buf[i]; i++)
+    buf[i] = 0;
 
-	if (!(string))
-		return (-1);
-	for (i = 0; string[i]; i++)
-		;
-	write(1, string, i);
-	return (i);
+  if (!(string))
+    return (-1);
+  for (i = 0; string[i]; i++)
+    putchar(string[i]);
+  return (i + trash);
 }
 
