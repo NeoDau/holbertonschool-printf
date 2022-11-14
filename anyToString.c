@@ -20,9 +20,15 @@ int ntostring(va_list args, int base, char *buffer, int indicator)
 		number = -number;
 		negative = 1;
 	}
-		PosNtoString(number, base, buffer, indicator);
-		if (negative)
-			return (_printf("%s", buffer - 1));
-		else
-			return (_printf("%s", buffer));
+	else if (number == 0)
+	{
+		putchar('0');
+		return (1);
+	}
+	PosNtoString(number, base, buffer, indicator);
+	if (negative)
+		return (_printf("%s", buffer - 1));
+	else
+		return (_printf("%s", buffer));
+
 }
