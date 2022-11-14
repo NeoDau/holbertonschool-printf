@@ -1,0 +1,11 @@
+Vision for the project in the future:
+
+The main problem the renewed function pointer version of the project faces in the future is that the all printing
+function ntostring is fed the base of the printed number in an else statement in the _printf program.
+
+The question is, what is going to happen when i need to print a hex number to the screen?
+
+Well, ironically a switch should take care of it, lets say you loop through an array of chars that represent formats and if one of those matches the format char then you could switch and set a base and indicator then. This mechanism is already part of the printf_h macro (in the _printf function) altough its not used in the same way.
+
+Time constraints have made the implementation of such a mechanism inconvenient especially because it is not mandatory
+for the project, although as i said before, it was done in the earlier version.
