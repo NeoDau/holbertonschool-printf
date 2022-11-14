@@ -11,7 +11,7 @@
 
 int ntostring(va_list args, int base, char *buffer, int indicator)
 {
-	long long int number = va_arg(args, int);
+	long int number = va_arg(args, int);
 	int negative = 0;
 
 	if (number < 0)
