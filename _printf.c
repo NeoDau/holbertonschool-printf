@@ -7,8 +7,7 @@
 
 int _printf(const char *format, ...)
 {
-	int escapeSeqArray[] = {'d', 'i', 'c', 's', '%', '\0'};
-	int foundPercent = 0, foundF = 0, len = 0, i = 0, j = 0,
+	int foundPercent = 0, len = 0, i = 0,
 	base = 0, indicator = 0;
 	char buf[32];
 	va_list args;
