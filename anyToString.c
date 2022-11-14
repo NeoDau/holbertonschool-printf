@@ -27,7 +27,7 @@ int ntostring(va_list args, int base, char *buffer, int indicator)
 	}
 	PosNtoString(number, base, buffer, indicator);
 	if (negative)
-		return (_printf("%s", buffer - 1));
+		return (_printf("%s", buffer - 1)); /* this is pretty cool*/
 	else
 		return (_printf("%s", buffer));
 
