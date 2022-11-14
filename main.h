@@ -15,7 +15,8 @@ typedef struct formatFunctions
 {
 	char specifier;
 	int (*f)(va_list args, int base, char *buffer, int indicator);
-}formatFunctions;
+} formatFunctions;
+
 int _printf(const char *format, ...);
 int (*formatFunc(char c))(va_list, int base, char *buf, int ind);
 int PosNtoString(long int number, int base, char *buffer, int indicator);
