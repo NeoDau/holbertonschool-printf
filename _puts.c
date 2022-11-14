@@ -13,9 +13,12 @@
 int _puts(va_list args, int b, char *buf, int ind)
 {
 	char *string = va_arg(args, char *);
+	char *null = "(null)";
 	int trash = b = ind = 0;
 	int i;
 
+	if (!string)
+		return (fputs(null, stdout));
 	for (i = 0; buf[i]; i++)
 		buf[i] = 0;
 	if (!(string))
